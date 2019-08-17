@@ -4,7 +4,8 @@
 \alias{mxplot.gg}
 \title{mxplot.gg}
 \usage{
-\method{mxplot}{gg}(..., use_one_x_axis = T, theme = theme_bw())
+\method{mxplot}{gg}(..., use_one_x_axis = T, theme = theme_bw(),
+  heights = NULL)
 }
 \arguments{
 \item{...}{ggplot objects}
@@ -12,6 +13,8 @@
 \item{use_one_x_axis}{if true, only the last plot show x-axis}
 
 \item{theme}{the theme}
+
+\item{heights}{the weight of the height of plots, eg. heights = c(2,1)}
 }
 \description{
 plot multiple xts objects by row

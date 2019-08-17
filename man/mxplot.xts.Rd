@@ -5,7 +5,7 @@
 \title{mxplot.xts}
 \usage{
 \method{mxplot}{xts}(..., use_one_x_axis = T, theme = theme_bw(),
-  titles = NULL)
+  titles = NULL, heights = NULL)
 }
 \arguments{
 \item{...}{xts objects}
@@ -15,6 +15,8 @@
 \item{theme}{the theme}
 
 \item{titles}{the vector of titles}
+
+\item{heights}{the weight of the height of plots, eg. heights = c(2,1)}
 }
 \description{
 plot multiple xts objects by row

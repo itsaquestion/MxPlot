@@ -5,7 +5,7 @@
 \title{mxplotList}
 \usage{
 mxplotList(plot_list, use_one_x_axis = T, theme = theme_bw(),
-  titles = NULL)
+  titles = NULL, heights = NULL)
 }
 \arguments{
 \item{plot_list}{a list of ggplot objects}
@@ -15,6 +15,8 @@ mxplotList(plot_list, use_one_x_axis = T, theme = theme_bw(),
 \item{theme}{the theme to apply}
 
 \item{titles}{a vector of titles}
+
+\item{heights}{the weight of the height of plots, eg. heights = c(2,1)}
 }
 \description{
 mxplotList

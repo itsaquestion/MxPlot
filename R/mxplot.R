@@ -18,15 +18,16 @@ mxplot = function(...){
 #'
 #' @param use_one_x_axis if true, only the last plot show x-axis
 #' @param theme the theme
+#' @param heights the weight of the height of plots, eg. heights = c(2,1)
 #'
 #' @return NULL
 #' @export
 #'
-mxplot.gg = function(..., use_one_x_axis = T,theme = theme_bw()) {
+mxplot.gg = function(..., use_one_x_axis = T, theme = theme_bw(), heights = NULL) {
 
   plots = list(...)
   assertList(plots,types = "gg")
-  mxplotList(plots,use_one_x_axis = use_one_x_axis, theme = theme)
+  mxplotList(plots, use_one_x_axis = use_one_x_axis, theme = theme, heights = heights)
 }
 
 
@@ -37,19 +38,20 @@ mxplot.gg = function(..., use_one_x_axis = T,theme = theme_bw()) {
 #' @param ... xts objects
 #' @param use_one_x_axis if true, only the last plot show x-axis
 #' @param theme the theme
+#' @param heights the weight of the height of plots, eg. heights = c(2,1)
 #' @param titles the vector of titles
 #'
 #' @return NULL
 #' @export
 #'
-mxplot.xts = function(..., use_one_x_axis = T,theme = theme_bw(),titles = NULL) {
+mxplot.xts = function(..., use_one_x_axis = T, theme = theme_bw(), titles = NULL, heights = NULL) {
 
   data = list(...)
 
   assertList(data,types = "xts")
 
   plots = lapply(data, ggxts)
-  mxplotList(plots,use_one_x_axis = use_one_x_axis, theme = theme,titles = titles)
+  mxplotList(plots, use_one_x_axis = use_one_x_axis, theme = theme, titles = titles, heights = heights)
 }
 
 
@@ -60,14 +62,17 @@ mxplot.xts = function(..., use_one_x_axis = T,theme = theme_bw(),titles = NULL) 
 #' @param use_one_x_axis if true then remove the x-axis of plots but the last
 #' @param theme the theme to apply
 #' @param titles a vector of titles
+#' @param heights the weight of the height of plots, eg. heights = c(2,1)
 #' @import ggplot2
 #' @import checkmate
 #' @import purrr
+#' @import egg
 #' @importFrom lubridate origin
 #'
 #' @export
 #'
-mxplotList = function(plot_list, use_one_x_axis = T, theme = theme_bw(), titles = NULL){
+mxplotList = function(plot_list,
+  use_one_x_axis = T, theme = theme_bw(), titles = NULL,heights = NULL){
   assertList(plot_list,types = c("gg","ggplot"))
 
   if(testClass(theme, c("theme","gg"))){
@@ -90,23 +95,10 @@ mxplotList = function(plot_list, use_one_x_axis = T, theme = theme_bw(), titles 
     removeLegendTitle %>%
     doAlign
 
-  doPlot(plot_list)
+  ggarrange(plots = plot_list, heights = heights)
 }
 
-#' doPlot
-#'
-#' @param plot_list a list of ggplot objects
-#' @import grid
-doPlot = function(plot_list){
-  gb_list = map(plot_list,ggplotGrob)
-  g = gb_list %>% reduce(rbind,size = "last")
 
-  g$widths = map(gb_list, ~.$widths) %>% reduce(grid::unit.pmax)
-
-  grid::grid.newpage()
-  grid::grid.draw(g)
-  invisible(T)
-}
 
 applyTheme = function(plot_list,theme){
   map(plot_list, ~ . + theme)
