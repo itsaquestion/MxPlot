@@ -1,4 +1,4 @@
 library(testthat)
-library(mxplot)
+library(MxPlot)
 
-test_check("mxplot")
+test_check("MxPlot")
