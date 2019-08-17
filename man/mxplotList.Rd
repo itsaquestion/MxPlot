@@ -8,16 +8,13 @@ mxplotList(plot_list, use_one_x_axis = T, theme = theme_bw(),
   titles = NULL)
 }
 \arguments{
-\item{plot_list}{as list of ggplot objects}
+\item{plot_list}{a list of ggplot objects}
 
 \item{use_one_x_axis}{if true then remove the x-axis of plots but the last}
 
 \item{theme}{the theme to apply}
 
 \item{titles}{a vector of titles}
-}
-\value{
-a ggplot object
 }
 \description{
 mxplotList

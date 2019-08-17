@@ -7,7 +7,7 @@
 doAlign(plot_list)
 }
 \arguments{
-\item{plot_list}{as list of ggplot objects}
+\item{plot_list}{a list of ggplot objects}
 }
 \description{
 doAlign

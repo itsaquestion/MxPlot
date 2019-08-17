@@ -56,7 +56,7 @@ mxplot.xts = function(..., use_one_x_axis = T,theme = theme_bw(),titles = NULL) 
 
 #' mxplotList
 #'
-#' @param plot_list as list of ggplot objects
+#' @param plot_list a list of ggplot objects
 #' @param use_one_x_axis if true then remove the x-axis of plots but the last
 #' @param theme the theme to apply
 #' @param titles a vector of titles
@@ -65,7 +65,6 @@ mxplot.xts = function(..., use_one_x_axis = T,theme = theme_bw(),titles = NULL) 
 #' @import purrr
 #' @importFrom lubridate origin
 #'
-#' @return a ggplot object
 #' @export
 #'
 mxplotList = function(plot_list, use_one_x_axis = T, theme = theme_bw(), titles = NULL){
@@ -96,7 +95,7 @@ mxplotList = function(plot_list, use_one_x_axis = T, theme = theme_bw(), titles 
 
 #' doPlot
 #'
-#' @param plot_list as list of ggplot objects
+#' @param plot_list a list of ggplot objects
 #' @import grid
 doPlot = function(plot_list){
   gb_list = map(plot_list,ggplotGrob)
@@ -136,7 +135,7 @@ fixThemeMargin = function(the_theme){
 
 #' doAlign
 #'
-#' @param plot_list as list of ggplot objects
+#' @param plot_list a list of ggplot objects
 #' @importFrom lubridate origin
 doAlign = function(plot_list){
   min_date =(map(plot_list, ~ min(.$data$Index))) %>% unlist %>% as.Date(origin=lubridate::origin) %>% min
