@@ -4,10 +4,12 @@
 \alias{doAlign}
 \title{doAlign}
 \usage{
-doAlign(plot_list, end_spacing = 0.1)
+doAlign(plots, end_spacing = 0.1)
 }
 \arguments{
-\item{plot_list}{a list of ggplot objects}
+\item{plots}{a list of ggplot objects}
+
+\item{end_spacing}{extend the space in the end, as a percentage of the size of xlim()}
 }
 \description{
 doAlign

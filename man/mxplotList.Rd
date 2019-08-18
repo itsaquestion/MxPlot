@@ -4,11 +4,11 @@
 \alias{mxplotList}
 \title{mxplotList}
 \usage{
-mxplotList(plot_list, use_one_x_axis = T, theme = theme_bw(),
+mxplotList(plots, use_one_x_axis = T, theme = theme_bw(),
   titles = NULL, heights = NULL, end_spacing = 0.1)
 }
 \arguments{
-\item{plot_list}{a list of ggplot objects}
+\item{plots}{a list of ggplot objects}
 
 \item{use_one_x_axis}{if true then remove the x-axis of plots but the last}
 

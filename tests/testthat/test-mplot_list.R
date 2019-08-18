@@ -22,17 +22,19 @@ test_that("multiplication works", {
   p1 = ggxts(x)
   p2 = ggxts(y$a)
 
+  mxplot(p1,p2,heights = c(1,2),size = 10)
+
   #egg::ggarrange(plots = list(p1,p2),heights=NULL)
 
-  plot_list = list(p2,p1)
+  plots = list(p2,p1)
+  mxplot(plots = plots,heights = c(1,2))
+
 
   mxplotList(list(p1,p2),theme=theme_textbook())
   expect_class(p1,"gg")
 
   a = mxplot(p1,p2,p1,heights = c(2,1,1))
-  #mxplot(x)
-  ggxts(index_price)
-  mxplot(index_price)
+
 
 
 })

@@ -2,12 +2,40 @@
 % Please edit documentation in R/mxplot.R
 \name{mxplot}
 \alias{mxplot}
+\alias{mxplot.gg}
+\alias{mxplot.xts}
+\alias{mxplot.list}
 \title{mxplot}
 \usage{
-mxplot(...)
+mxplot(..., use_one_x_axis = TRUE, theme = theme_bw(), titles = NULL,
+  heights = NULL, size = 0.8, end_spacing = 0.1)
+
+\method{mxplot}{gg}(..., use_one_x_axis = TRUE, theme = theme_bw(),
+  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1)
+
+\method{mxplot}{xts}(..., use_one_x_axis = T, theme = theme_bw(),
+  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1)
+
+\method{mxplot}{list}(..., use_one_x_axis = T, theme = theme_bw(),
+  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1)
 }
 \arguments{
-\item{...}{arguments pass to mxplotList}
+\item{...}{xts or ggplot objects, or a list of ggplot objects}
+
+\item{use_one_x_axis}{if true then remove the x-axis of plots but the last}
+
+\item{theme}{the theme to apply}
+
+\item{titles}{a vector of titles}
+
+\item{heights}{the weight of the height of plots, eg. heights = c(2,1)}
+
+\item{size}{line width}
+
+\item{end_spacing}{extend the space in the end, as a percentage of the size of xlim().}
+}
+\value{
+egg object
 }
 \description{
 plot multiple xts objects by row

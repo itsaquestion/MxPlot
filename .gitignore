@@ -2,6 +2,7 @@
 .Rhistory
 .Rapp.history
 
+.vs
 # Session Data files
 .RData
 
