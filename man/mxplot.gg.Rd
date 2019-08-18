@@ -5,7 +5,7 @@
 \title{mxplot.gg}
 \usage{
 \method{mxplot}{gg}(..., use_one_x_axis = T, theme = theme_bw(),
-  heights = NULL)
+  heights = NULL, end_spacing = 0.1)
 }
 \arguments{
 \item{...}{ggplot objects}
@@ -15,6 +15,8 @@
 \item{theme}{the theme}
 
 \item{heights}{the weight of the height of plots, eg. heights = c(2,1)}
+
+\item{end_spacing}{extend the space in the end, as a percentage of the size of xlim().}
 }
 \description{
 plot multiple xts objects by row

@@ -4,12 +4,14 @@
 \alias{ggxts}
 \title{ggxts}
 \usage{
-ggxts(x, digits = 2)
+ggxts(x, digits = 2, size = 0.8)
 }
 \arguments{
 \item{x}{the xts object}
 
 \item{digits}{digits of ene values}
+
+\item{size}{line width}
 }
 \value{
 ggplot object

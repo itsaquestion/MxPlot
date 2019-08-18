@@ -15,19 +15,26 @@ mxplot = function(...){
 #' plot multiple xts objects by row
 #'
 #' @param ... ggplot objects
-#'
+#' 
 #' @param use_one_x_axis if true, only the last plot show x-axis
 #' @param theme the theme
 #' @param heights the weight of the height of plots, eg. heights = c(2,1)
-#'
+#' @param end_spacing extend the space in the end, as a percentage of the size of xlim().
 #' @return NULL
 #' @export
 #'
-mxplot.gg = function(..., use_one_x_axis = T, theme = theme_bw(), heights = NULL) {
+mxplot.gg = function(...,
+    use_one_x_axis = T,
+    theme = theme_bw(),
+    heights = NULL,
+    end_spacing = 0.1) {
 
   plots = list(...)
   assertList(plots,types = "gg")
-  mxplotList(plots, use_one_x_axis = use_one_x_axis, theme = theme, heights = heights)
+  mxplotList(plots, use_one_x_axis = use_one_x_axis,
+    theme = theme,
+    heights = heights,
+    end_spacing = end_spacing)
 }
 
 
@@ -37,21 +44,31 @@ mxplot.gg = function(..., use_one_x_axis = T, theme = theme_bw(), heights = NULL
 #'
 #' @param ... xts objects
 #' @param use_one_x_axis if true, only the last plot show x-axis
+#' @param size line width
 #' @param theme the theme
 #' @param heights the weight of the height of plots, eg. heights = c(2,1)
+#' @param end_spacing extend the space in the end, as a percentage of the size of xlim().
 #' @param titles the vector of titles
 #'
 #' @return NULL
 #' @export
 #'
-mxplot.xts = function(..., use_one_x_axis = T, theme = theme_bw(), titles = NULL, heights = NULL) {
+mxplot.xts = function(..., use_one_x_axis = T,
+      theme = theme_bw(),
+      titles = NULL,
+      heights = NULL,
+      size = 0.8,
+      end_spacing = 0.1) {
 
   data = list(...)
 
   assertList(data,types = "xts")
 
-  plots = lapply(data, ggxts)
-  mxplotList(plots, use_one_x_axis = use_one_x_axis, theme = theme, titles = titles, heights = heights)
+  plots = map(data, ~ggxts(.,size = size))
+  mxplotList(plots,
+    use_one_x_axis = use_one_x_axis,
+    theme = theme, titles = titles,
+    heights = heights,end_spacing = end_spacing)
 }
 
 
@@ -63,6 +80,7 @@ mxplot.xts = function(..., use_one_x_axis = T, theme = theme_bw(), titles = NULL
 #' @param theme the theme to apply
 #' @param titles a vector of titles
 #' @param heights the weight of the height of plots, eg. heights = c(2,1)
+#' @param end_spacing extend the space in the end, as a percentage of the size of xlim().
 #' @import ggplot2
 #' @import checkmate
 #' @import purrr
@@ -72,7 +90,12 @@ mxplot.xts = function(..., use_one_x_axis = T, theme = theme_bw(), titles = NULL
 #' @export
 #'
 mxplotList = function(plot_list,
-  use_one_x_axis = T, theme = theme_bw(), titles = NULL,heights = NULL){
+  use_one_x_axis = T,
+  theme = theme_bw(),
+  titles = NULL,
+  heights = NULL,end_spacing = 0.1){
+
+
   assertList(plot_list,types = c("gg","ggplot"))
 
   if(testClass(theme, c("theme","gg"))){
@@ -93,7 +116,7 @@ mxplotList = function(plot_list,
 
   plot_list = plot_list %>%
     removeLegendTitle %>%
-    doAlign
+    doAlign(end_spacing = end_spacing)
 
   ggarrange(plots = plot_list, heights = heights)
 }
@@ -129,9 +152,11 @@ fixThemeMargin = function(the_theme){
 #'
 #' @param plot_list a list of ggplot objects
 #' @importFrom lubridate origin
-doAlign = function(plot_list){
+doAlign = function(plot_list, end_spacing = 0.1){
   min_date =(map(plot_list, ~ min(.$data$Index))) %>% unlist %>% as.Date(origin=lubridate::origin) %>% min
   max_date = (map(plot_list, ~ max(.$data$Index))) %>% unlist %>% as.Date(origin=lubridate::origin) %>% max
+  diff = as.numeric((max_date - min_date))
+  max_date = max_date + floor(diff * end_spacing)
 
   lapply(plot_list, function(x){
     x$coordinates$limits$x = c(min_date,max_date)

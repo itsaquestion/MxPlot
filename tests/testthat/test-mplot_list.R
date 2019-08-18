@@ -8,6 +8,7 @@ test_that("multiplication works", {
   library(purrr)
   library(ggplot2)
   library(directlabels)
+  library(egg)
 
   date_1 = seq(as.Date("2000-01-01"),as.Date("2000-01-10"),"days")
 
@@ -15,7 +16,7 @@ test_that("multiplication works", {
   x = xts::as.xts(df_1+10, order.by = date_1)
   y = xts::as.xts(df_1, order.by = date_1  + 5)
 
-  mxplot(x, y,heights = c(2,1))
+  mxplot(x, y,heights = c(2,1),size = 2)
 
 
   p1 = ggxts(x)
@@ -30,6 +31,11 @@ test_that("multiplication works", {
 
   a = mxplot(p1,p2,p1,heights = c(2,1,1))
   #mxplot(x)
+  ggxts(index_price)
+  mxplot(index_price)
 
 
 })
+
+
+

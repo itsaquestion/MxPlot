@@ -4,7 +4,7 @@
 \alias{doAlign}
 \title{doAlign}
 \usage{
-doAlign(plot_list)
+doAlign(plot_list, end_spacing = 0.1)
 }
 \arguments{
 \item{plot_list}{a list of ggplot objects}

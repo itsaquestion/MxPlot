@@ -5,7 +5,7 @@
 \title{mxplot.xts}
 \usage{
 \method{mxplot}{xts}(..., use_one_x_axis = T, theme = theme_bw(),
-  titles = NULL, heights = NULL)
+  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1)
 }
 \arguments{
 \item{...}{xts objects}
@@ -17,6 +17,10 @@
 \item{titles}{the vector of titles}
 
 \item{heights}{the weight of the height of plots, eg. heights = c(2,1)}
+
+\item{size}{line width}
+
+\item{end_spacing}{extend the space in the end, as a percentage of the size of xlim().}
 }
 \description{
 plot multiple xts objects by row
