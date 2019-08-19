@@ -1,15 +1,17 @@
 #' mxplot
 #'
-#' plot multiple xts objects by row
-#' @param ... xts or ggplot objects, or a list of ggplot objects
+#' Plot multiple xts objects by row.
+#' Auto align the range of xlim of all plots.
+#' Show the latest value of xts objects.
+#' @param ... xts or ggplot objects, or a list of ggplot objects. If it's a list, only the 1st item works.
 #' @param use_one_x_axis if true then remove the x-axis of plots but the last
 #' @param theme the theme to apply
-#' @param titles a vector of titles
+#' @param titles a vector of titles.
 #' @param heights the weight of the height of plots, eg. heights = c(2,1)
 #' @param size line width
-#' @param end_spacing extend the space in the end, as a percentage of the size of xlim().
+#' @param end_spacing extend the space at the end of plot, as a percentage of the size of xlim().
 #'
-#' @return egg object
+#' @return an egg object.
 #' @export
 #'
 mxplot = function(...,

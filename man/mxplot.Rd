@@ -20,23 +20,25 @@ mxplot(..., use_one_x_axis = TRUE, theme = theme_bw(), titles = NULL,
   titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1)
 }
 \arguments{
-\item{...}{xts or ggplot objects, or a list of ggplot objects}
+\item{...}{xts or ggplot objects, or a list of ggplot objects. If it's a list, only the 1st item works.}
 
 \item{use_one_x_axis}{if true then remove the x-axis of plots but the last}
 
 \item{theme}{the theme to apply}
 
-\item{titles}{a vector of titles}
+\item{titles}{a vector of titles.}
 
 \item{heights}{the weight of the height of plots, eg. heights = c(2,1)}
 
 \item{size}{line width}
 
-\item{end_spacing}{extend the space in the end, as a percentage of the size of xlim().}
+\item{end_spacing}{extend the space at the end of plot, as a percentage of the size of xlim().}
 }
 \value{
-egg object
+an egg object.
 }
 \description{
-plot multiple xts objects by row
+Plot multiple xts objects by row.
+Auto align the range of xlim of all plots.
+Show the latest value of xts objects.
 }

@@ -1,6 +1,6 @@
 Package: MxPlot
 Title: multi-row xts plot based on ggplot2
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: person("Weicheng", "Li", email = "itsaquestion@gmail.com", role = c("aut", "cre"))
 Description: plot multiple xts objects by row
 Depends: R (>= 3.3.0)
