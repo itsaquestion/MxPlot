@@ -10,6 +10,8 @@
 #' @param heights the weight of the height of plots, eg. heights = c(2,1)
 #' @param size line width
 #' @param end_spacing extend the space at the end of plot, as a percentage of the size of xlim().
+#' @param vlines add multiple geom_vline(). eg vlines = c("2000-01-05","2000-01-13").
+#' @param vlines_color color of vlines
 #'
 #' @return an egg object.
 #' @export
@@ -20,7 +22,9 @@ mxplot = function(...,
                   titles = NULL,
                   heights = NULL,
                   size = 0.8,
-                  end_spacing = 0.1) {
+                  end_spacing = 0.1,
+                  vlines = NULL,
+                  vlines_color = "gray50") {
 
   UseMethod("mxplot")
 
@@ -28,7 +32,7 @@ mxplot = function(...,
 
 
 #' mxplot.gg
-#'
+#' @export
 #' @rdname mxplot
 mxplot.gg = function(...,
                      use_one_x_axis = TRUE,
@@ -36,7 +40,9 @@ mxplot.gg = function(...,
                      titles = NULL,
                      heights = NULL,
                      size = 0.8,
-                     end_spacing = 0.1) {
+                     end_spacing = 0.1,
+                     vlines = NULL,
+                     vlines_color = "gray50") {
 
   plots = list(...)
   assertList(plots,types = "gg")
@@ -46,14 +52,16 @@ mxplot.gg = function(...,
              theme = theme,
              titles = titles,
              heights = heights,
-             end_spacing = end_spacing)
+             end_spacing = end_spacing,
+             vlines = vlines,
+             vlines_color=vlines_color)
 }
 
 
 
 
 #' mxplot.xts
-#'
+#' @export
 #' @rdname mxplot
 mxplot.xts = function(...,
                       use_one_x_axis = T,
@@ -61,7 +69,9 @@ mxplot.xts = function(...,
                       titles = NULL,
                       heights = NULL,
                       size = 0.8,
-                      end_spacing = 0.1) {
+                      end_spacing = 0.1,
+                      vlines = NULL,
+                      vlines_color = "gray50") {
 
   data = list(...)
 
@@ -74,14 +84,16 @@ mxplot.xts = function(...,
              theme = theme,
              titles = titles,
              heights = heights,
-             end_spacing = end_spacing)
+             end_spacing = end_spacing,
+             vlines = vlines,
+             vlines_color=vlines_color)
 }
 
 
 
 
 #' mxplot.list
-#'
+#' @export
 #' @rdname mxplot
 mxplot.list = function(...,
                       use_one_x_axis = T,
@@ -89,7 +101,9 @@ mxplot.list = function(...,
                       titles = NULL,
                       heights = NULL,
                       size = 0.8,
-                      end_spacing = 0.1) {
+                      end_spacing = 0.1,
+                      vlines = NULL,
+                      vlines_color = "gray50") {
 
   plots = list(...)[[1]]
 
@@ -100,32 +114,27 @@ mxplot.list = function(...,
              theme = theme,
              titles = titles,
              heights = heights,
-             end_spacing = end_spacing)
+             end_spacing = end_spacing,
+             vlines = vlines,
+             vlines_color=vlines_color)
 }
 
 
 
 #' mxplotList
-#'
-#' @param plots a list of ggplot objects
-#' @param use_one_x_axis if true then remove the x-axis of plots but the last
-#' @param theme the theme to apply
-#' @param titles a vector of titles
-#' @param heights the weight of the height of plots, eg. heights = c(2,1)
-#' @param end_spacing extend the space in the end, as a percentage of the size of xlim().
-#'
+#' @import egg
+#' @import purrr
 #' @import ggplot2
 #' @import checkmate
-#' @import purrr
-#' @import egg
 #' @importFrom lubridate origin
-#'
 mxplotList = function(plots,
                       use_one_x_axis = T,
                       theme = theme_bw(),
                       titles = NULL,
                       heights = NULL,
-                      end_spacing = 0.1){
+                      end_spacing = 0.1,
+                      vlines = NULL,
+                      vlines_color = "gray50"){
 
 
   assertList(plots,types = c("gg","ggplot"))
@@ -144,6 +153,10 @@ mxplotList = function(plots,
     for(i in 1:length(titles)){
       plots[[i]] = plots[[i]] + ggtitle(titles[i])
     }
+  }
+
+  if(!is.null(vlines)){
+    plots = map(plots, ~ . + geom_vline(xintercept = as.Date(vlines),col = vlines_color))
   }
 
   plots = plots %>%
@@ -181,7 +194,7 @@ fixThemeMargin = function(the_theme){
 }
 
 #' doAlign
-#'
+#' @import purrr
 #' @param plots a list of ggplot objects
 #' @param end_spacing extend the space in the end, as a percentage of the size of xlim()
 #' @importFrom lubridate origin

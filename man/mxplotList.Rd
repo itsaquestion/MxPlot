@@ -5,20 +5,8 @@
 \title{mxplotList}
 \usage{
 mxplotList(plots, use_one_x_axis = T, theme = theme_bw(),
-  titles = NULL, heights = NULL, end_spacing = 0.1)
-}
-\arguments{
-\item{plots}{a list of ggplot objects}
-
-\item{use_one_x_axis}{if true then remove the x-axis of plots but the last}
-
-\item{theme}{the theme to apply}
-
-\item{titles}{a vector of titles}
-
-\item{heights}{the weight of the height of plots, eg. heights = c(2,1)}
-
-\item{end_spacing}{extend the space in the end, as a percentage of the size of xlim().}
+  titles = NULL, heights = NULL, end_spacing = 0.1, vlines = NULL,
+  vlines_color = "gray50")
 }
 \description{
 mxplotList

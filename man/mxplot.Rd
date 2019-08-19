@@ -8,16 +8,20 @@
 \title{mxplot}
 \usage{
 mxplot(..., use_one_x_axis = TRUE, theme = theme_bw(), titles = NULL,
-  heights = NULL, size = 0.8, end_spacing = 0.1)
+  heights = NULL, size = 0.8, end_spacing = 0.1, vlines = NULL,
+  vlines_color = "gray50")
 
 \method{mxplot}{gg}(..., use_one_x_axis = TRUE, theme = theme_bw(),
-  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1)
+  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1,
+  vlines = NULL, vlines_color = "gray50")
 
 \method{mxplot}{xts}(..., use_one_x_axis = T, theme = theme_bw(),
-  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1)
+  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1,
+  vlines = NULL, vlines_color = "gray50")
 
 \method{mxplot}{list}(..., use_one_x_axis = T, theme = theme_bw(),
-  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1)
+  titles = NULL, heights = NULL, size = 0.8, end_spacing = 0.1,
+  vlines = NULL, vlines_color = "gray50")
 }
 \arguments{
 \item{...}{xts or ggplot objects, or a list of ggplot objects. If it's a list, only the 1st item works.}
@@ -33,6 +37,10 @@ mxplot(..., use_one_x_axis = TRUE, theme = theme_bw(), titles = NULL,
 \item{size}{line width}
 
 \item{end_spacing}{extend the space at the end of plot, as a percentage of the size of xlim().}
+
+\item{vlines}{add multiple geom_vline(). eg vlines = c("2000-01-05","2000-01-13").}
+
+\item{vlines_color}{color of vlines}
 }
 \value{
 an egg object.

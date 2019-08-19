@@ -35,9 +35,26 @@ test_that("multiplication works", {
 
   a = mxplot(p1,p2,p1,heights = c(2,1,1))
 
-
-
+  vlines = c("2000-01-05","2000-01-13")
+  mxplot(p1,p2,vlines = vlines)
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
